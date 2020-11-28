@@ -38,11 +38,11 @@ app.get('/app-info', function(req, res) {
       n === 'expressInit' || n === 'serveStatic'));
     
     // filter out CORS Headers
-    var hs = Object.keys(res._headers)
+    var hs = Object.keys(res.getHeaders())
       .filter(h => !h.match(/^access-control-\w+/));
     var hObj = {};
-    hs.forEach(h => {hObj[h] = res._headers[h]});
-    delete res._headers['strict-transport-security'];
+    hs.forEach(h => {hObj[h] = res.getHeaders()[h]});
+    delete res.getHeaders()['strict-transport-security'];
   res.json({headers: hObj, appStack: appMainRouteStack });
 });
 
