@@ -8,6 +8,8 @@ app.use(helmet());
 app.use(helmet.hidePoweredBy());
 // This middleware sets the X-Frame-Options header. It restricts who can put your site in a frame. Mitigate the Risk of Clickjacking.
 app.use(helmet.frameguard({action: 'deny'}));
+// Mitigate the Risk of Cross Site Scripting (XSS) Attacks. The browser detects a potential injected script using a heuristic filter. If the header is enabled, the browser changes the script code, neutralizing it. It still has limited support.
+app.use(helmet.xssFilter());
 
 
 
