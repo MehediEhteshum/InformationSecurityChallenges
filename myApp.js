@@ -2,9 +2,12 @@ const express = require('express');
 const helmet = require('helmet');
 const app = express();
 
+// helps you secure your Express apps by setting various HTTP headers.
 app.use(helmet());
+// Hide Potentially Dangerous Information. remove the X-Powered-By header.
 app.use(helmet.hidePoweredBy());
-
+// This middleware sets the X-Frame-Options header. It restricts who can put your site in a frame. Mitigate the Risk of Clickjacking.
+app.use(helmet.frameguard({action: 'deny'}));
 
 
 
