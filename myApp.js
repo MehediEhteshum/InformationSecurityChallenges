@@ -12,9 +12,12 @@ app.use(helmet.frameguard({action: 'deny'}));
 app.use(helmet.xssFilter());
 // Avoid Inferring the Response MIME Type with helmet.noSniff(). Browsers can use content or MIME sniffing to override response Content-Type headers to guess and process the data using an implicit content type. While this can be convenient in some scenarios, it can also lead to some dangerous attacks. This middleware sets the X-Content-Type-Options header to nosniff, instructing the browser to not bypass the provided Content-Type.
 app.use(helmet.noSniff());
+// Prevent IE from Opening Untrusted HTML with helmet.ieNoOpen(). Some web applications will serve untrusted HTML for download. Some versions of Internet Explorer by default open those HTML files in the context of your site. This middleware sets the X-Download-Options header to noopen.
+app.use(helmet.ieNoOpen());
 
 
-module.exports = app;
+
+ts = app;
 var api = require('./server.js');
 app.use(express.static('public'));
 app.disable('strict-transport-security');
