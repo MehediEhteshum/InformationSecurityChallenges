@@ -8,6 +8,8 @@ var app = express();
 var fs = require('fs');
 var path = require('path');
 
+app.disable('x-powered-by');
+
 app.use(function(req, res, next) {
   res.set({
     "Access-Control-Allow-Origin" : "*",
