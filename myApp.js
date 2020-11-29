@@ -16,6 +16,8 @@ app.use(helmet.noSniff());
 app.use(helmet.ieNoOpen());
 // Ask Browsers to Access Your Site via HTTPS Only with helmet.hsts(). HTTP Strict Transport Security (HSTS) is a web security policy which helps to protect websites against protocol downgrade attacks and cookie hijacking. If your website can be accessed via HTTPS you can ask user’s browsers to avoid using insecure HTTP. By setting the header Strict-Transport-Security, you tell the browsers to use HTTPS for the future requests in a specified amount of time. This will work for the requests coming after the initial request.
 app.use(helmet.hsts({maxAge: 7776000, force: true}));
+// Disable DNS Prefetching with helmet.dnsPrefetchControl(). To improve performance, most browsers prefetch DNS records for the links in a page. In that way the destination ip is already known when the user clicks on a link. This may lead to over-use of the DNS service (if you own a big website, visited by millions people…), privacy issues (one eavesdropper could infer that you are on a certain page), or page statistics alteration (some links may appear visited even if they are not). If you have high security needs you can disable DNS prefetching, at the cost of a performance penalty.
+app.use(helmet.dnsPrefetchControl());
 
 
 
