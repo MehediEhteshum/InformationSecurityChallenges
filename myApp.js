@@ -20,10 +20,16 @@ app.use(helmet.hsts({maxAge: 7776000, force: true}));
 app.use(helmet.dnsPrefetchControl());
 // Disable Client-Side Caching with helmet.noCache(). If you are releasing an update for your website, and you want the users to always download the newer version, you can (try to) disable caching on client’s browser. It can be useful in development too. Caching has performance benefits, which you will lose, so only use this option when there is a real need.
 app.use(helmet.noCache());
+// Set a Content Security Policy with helmet.contentSecurityPolicy(). It can significantly reduce the risk and impact of many type of attacks in modern browsers. By setting and configuring a Content Security Policy you can prevent the injection of anything unintended into your page. This will protect your app from XSS vulnerabilities, undesired tracking, malicious frames, and much more.
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'", "trusted-cdn.com"]
+  }
+}));
 
 
-
-ts = app;
+module.exports = app;
 var api = require('./server.js');
 app.use(express.static('public'));
 app.disable('strict-transport-security');
